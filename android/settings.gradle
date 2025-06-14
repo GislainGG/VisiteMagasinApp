@@ -1,41 +1,27 @@
 pluginManagement {
-  def reactNativeGradlePlugin = new File(
-    providers.exec {
-      workingDir(rootDir)
-      commandLine("node", "--print", "require.resolve('@react-native/gradle-plugin/package.json', { paths: [require.resolve('react-native/package.json')] })")
-    }.standardOutput.asText.get().trim()
-  ).getParentFile().absolutePath
-  includeBuild(reactNativeGradlePlugin)
-  
-  def expoPluginsPath = new File(
-    providers.exec {
-      workingDir(rootDir)
-      commandLine("node", "--print", "require.resolve('expo-modules-autolinking/package.json', { paths: [require.resolve('expo/package.json')] })")
-    }.standardOutput.asText.get().trim(),
-    "../android/expo-gradle-plugin"
-  ).absolutePath
-  includeBuild(expoPluginsPath)
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        // node_modules repos (Expo, RN gradle plugins)
+        maven {
+            url = uri("$rootDir/../node_modules/react-native/android")
+        }
+    }
 }
 
-plugins {
-  id("com.facebook.react.settings")
-  id("expo-autolinking-settings")
-}
+rootProject.name = "VisiteMagasin"
 
-extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
-  if (System.getenv('EXPO_USE_COMMUNITY_AUTOLINKING') == '1') {
-    ex.autolinkLibrariesFromCommand()
-  } else {
-    ex.autolinkLibrariesFromCommand(expoAutolinking.rnConfigCommand)
-  }
-}
-expoAutolinking.useExpoModules()
+// Include React Native Gradle Plugin for autolinking
+def reactNativeGradlePluginPath = new File(
+    rootDir, "../node_modules/react-native/gradle-plugin"
+)
+includeBuild(reactNativeGradlePluginPath)
 
-rootProject.name = 'VisiteMagasin'
+// Include Expo Autolinking Plugin
+def expoAutolinkingPluginPath = new File(
+    rootDir, "../node_modules/expo-modules-autolinking/android/expo-gradle-plugin"
+)
+includeBuild(expoAutolinkingPluginPath)
 
-expoAutolinking.useExpoVersionCatalog()
-
-include ':app'
-
-// **Important** : il faut aussi inclure le plugin React Native gradle
-includeBuild(expoAutolinking.reactNativeGradlePlugin)
+include(":app")
