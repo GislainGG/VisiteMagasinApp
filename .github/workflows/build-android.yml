@@ -26,6 +26,10 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
+    - name: Rendre gradlew exécutable
+      run: chmod +x ./gradlew
+      working-directory: android
+
     - name: Build APK
       run: ./gradlew assembleDebug
       working-directory: android
@@ -35,3 +39,4 @@ jobs:
       with:
         name: app-debug.apk
         path: android/app/build/outputs/apk/debug/app-debug.apk
+
