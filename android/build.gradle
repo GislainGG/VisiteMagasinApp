@@ -1,26 +1,30 @@
-buildscript {
-    ext {
-        compileSdkVersion = 35
-        minSdkVersion = 24
-        targetSdkVersion = 35
-        ndkVersion = "27.1.12297006"
-        hermesEnabled = true
-        enableProguardInReleaseBuilds = false
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.gislain.visitemagasin"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
     }
-    repositories {
-        google()
-        mavenCentral()
+
+    buildTypes {
+        debug {}
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
     }
-    dependencies {
-        classpath("com.android.tools.build:gradle:8.0.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.21")
-        classpath("com.facebook.react:react-native-gradle-plugin")  // <-- Ajouté ici
-    }
+
+    ndkVersion rootProject.ext.ndkVersion
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.21"
+    // Ajoute ici les dépendances natives Android dont tu as besoin
+    // Pas de dépendance React Native ici
 }
