@@ -36,4 +36,6 @@ rootProject.name = 'VisiteMagasin'
 expoAutolinking.useExpoVersionCatalog()
 
 include ':app'
+
+// **Important** : il faut aussi inclure le plugin React Native gradle
 includeBuild(expoAutolinking.reactNativeGradlePlugin)
