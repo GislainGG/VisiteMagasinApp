@@ -12,12 +12,6 @@ pluginManagement {
 
 rootProject.name = "VisiteMagasin"
 
-// Include React Native Gradle Plugin for autolinking
-def reactNativeGradlePluginPath = new File(
-    rootDir, "../node_modules/react-native/gradle-plugin"
-)
-includeBuild(reactNativeGradlePluginPath)
-
 // Include Expo Autolinking Plugin
 def expoAutolinkingPluginPath = new File(
     rootDir, "../node_modules/expo-modules-autolinking/android/expo-gradle-plugin"
