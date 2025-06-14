@@ -1,0 +1,18 @@
+{
+  "name": "VisiteMagasin",
+  "version": "1.0.0",
+  "main": "App.js",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "build": "eas build --platform android"
+  },
+  "dependencies": {
+    "expo": "~50.0.0",
+    "expo-image-picker": "~14.2.1",
+    "expo-mail-composer": "~12.5.0",
+    "react": "18.2.0",
+    "react-native": "0.73.0"
+  }
+}
