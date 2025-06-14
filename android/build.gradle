@@ -1,25 +1,33 @@
-// android/build.gradle
-buildscript {
-    ext {
-        compileSdkVersion = 35
-        minSdkVersion = 24
-        targetSdkVersion = 35
-        ndkVersion = "27.1.12297006"
-        enableProguardInReleaseBuilds = false
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.gislain.visitemagasin"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
     }
-    repositories {
-        google()
-        mavenCentral()
+
+    buildTypes {
+        debug {
+            // debug spécifique ici (ex: signingConfig)
+        }
+        release {
+            minifyEnabled rootProject.ext.enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
     }
-    dependencies {
-        classpath("com.android.tools.build:gradle:8.0.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.21")
-    }
+
+    ndkVersion rootProject.ext.ndkVersion
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.21"
+    implementation "androidx.core:core-ktx:1.10.1"
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "com.google.android.material:material:1.9.0"
 }
