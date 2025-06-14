@@ -4,6 +4,9 @@
       "eas": {
         "projectId": "3f57e5b0-c00c-4501-86dd-0eabaf5f231e"
       }
+    },
+    "android": {
+      "package": "com.gislain.visitemagasin"
     }
   }
 }

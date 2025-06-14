@@ -4,15 +4,20 @@
   "main": "App.js",
   "private": true,
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --dev-client",
     "android": "expo run:android",
-    "build": "eas build --platform android"
+    "build": "eas build --platform android",
+    "ios": "expo run:ios"
   },
   "dependencies": {
-    "expo": "~50.0.0",
-    "expo-image-picker": "~14.2.1",
+    "expo": "^53.0.11",
+    "expo-image-picker": "^14.2.0",
     "expo-mail-composer": "~12.5.0",
-    "react": "18.2.0",
-    "react-native": "0.73.0"
+    "react": "19.0.0",
+    "react-native": "0.79.3",
+    "expo-status-bar": "~2.2.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0"
   }
 }
